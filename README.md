@@ -5,7 +5,7 @@ Edited version of https://github.com/unified-naming-convention/NamingStandard
 
 
 Changes: Instead of a hidden .test folder on some devices, there is now a non-hidden, UNCChecktest folder.
-Also edited so getscriptclosure works again, roblox moved a module script that the orginal one depended on.
+Plan to fix getscriptclosure
 
 ----------
 Loadstring

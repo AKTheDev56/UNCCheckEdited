@@ -560,7 +560,7 @@ test("getconnections", {}, function()
 end)
 
 test("getcustomasset", {}, function()
-	writefile(".tests/getcustomasset.txt", "success")
+	writefile("UNCChecktests/getcustomasset.txt", "success")
 	local contentId = getcustomasset(".tests/getcustomasset.txt")
 	assert(type(contentId) == "string", "Did not return a string")
 	assert(#contentId > 0, "Returned an empty string")

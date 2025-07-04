@@ -490,7 +490,7 @@ end)
 
 test("loadfile", {}, function()
 	writefile("UNCChecktests/loadfile.txt", "return ... + 1")
-	assert(assert(loadfile(".tests/loadfile.txt"))(1) == 2, "Failed to load a file with arguments")
+	assert(assert(loadfile("UNCChecktests/loadfile.txt"))(1) == 2, "Failed to load a file with arguments")
 	writefile("UNCChecktests/loadfile.txt", "f")
 	local callback, err = loadfile("UNCChecktests/loadfile.txt")
 	assert(err and not callback, "Did not return an error message for a compiler error")

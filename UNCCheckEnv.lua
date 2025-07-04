@@ -204,7 +204,7 @@ return module
 
 	local module = closuregui:FindFirstChild("getscriptclosureTestModule")
 	local constants = getrenv().require(module)
-	local generated = getscriptclosure(module)()
+	local generated = getscriptclosure(module)
 	assert(constants ~= generated, "Generated module should not match the original")
 	assert(shallowEqual(constants, generated), "Generated constant table should be shallow equal to the original")
 end)

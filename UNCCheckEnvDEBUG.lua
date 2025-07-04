@@ -201,7 +201,7 @@ print("wsp gng, getscriptclosure works")
 
 return module
 ]]
-
+        task.wait(1)
 	local module = closuregui:FindFirstChild("getscriptclosureTestModule")
 
 	local success, result = pcall(function()

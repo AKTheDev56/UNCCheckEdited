@@ -8,3 +8,10 @@ Changes: Instead of a hidden .test folder on some devices, there is now a non-hi
 
 
 loadstring(game:HttpGet('https://raw.githubusercontent.com/AKTheDev56/UNCCheckEdited/refs/heads/main/UNCCheckEnv.lua')()
+
+
+-----------------
+TXT VERSION BELOW
+-----------------
+
+loadstring(game:HttpGet('https://raw.githubusercontent.com/AKTheDev56/UNCCheckEdited/refs/heads/main/UNCCheckEnv.txt')()

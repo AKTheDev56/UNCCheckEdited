@@ -164,9 +164,10 @@ test("getcallingscript", {})
 
 test("getscriptclosure", {"getscriptfunction"}, function()
 	local module = game:GetService("CoreGui").RobloxGui.Modules.Common.AvatarChatConstants
+	assert(module, "Module reference is nil")
 
 	local constants = require(module)
-	assert(type(constants) == "table", "Original module did not return a table")
+	assert(type(constants) == "table", "Original module did not return a table. Got: " .. typeof(constants))
 
 	local closureFunc = getscriptclosure(module)
 	assert(type(closureFunc) == "function", "getscriptclosure did not return a function")

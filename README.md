@@ -11,6 +11,8 @@ getscriptclosure Fixed!
 ----------
 Loadstring
 ----------
+
+
 loadstring(game:HttpGet('https://raw.githubusercontent.com/AKTheDev56/UNCCheckEdited/refs/heads/main/UNCCheckEnv.lua')()
 
 
@@ -19,3 +21,10 @@ loadstring(game:HttpGet('https://raw.githubusercontent.com/AKTheDev56/UNCCheckEd
 -----------------
 
 loadstring(game:HttpGet('https://raw.githubusercontent.com/AKTheDev56/UNCCheckEdited/refs/heads/main/UNCCheckEnv.txt')()
+
+
+------------
+GrandUNCtest
+------------
+
+loadstring(game:HttpGet('https://raw.githubusercontent.com/AKTheDev56/UNCCheckEdited/refs/heads/main/GrandUNCtest')()

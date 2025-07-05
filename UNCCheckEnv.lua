@@ -163,9 +163,18 @@ end)
 test("getcallingscript", {})
 
 test("getscriptclosure", {"getscriptfunction"}, function()
-	local module = game:GetService("CoreGui").RobloxGui.Modules.Common.Constants
+	local module = game.Players.LocalPlayer.PlayerScripts.PlayerModule
+	assert(module, "Module reference is nil")
+
 	local constants = getrenv().require(module)
-	local generated = getscriptclosure(module)()
+	assert(type(constants) == "table", "Original module did not return a table. Got: " .. typeof(constants))
+
+	local closureFunc = getscriptclosure(module)
+	assert(type(closureFunc) == "function", "getscriptclosure did not return a function")
+
+	local generated = closureFunc()
+	assert(type(generated) == "table", "Generated module did not return a table")
+
 	assert(constants ~= generated, "Generated module should not match the original")
 	assert(shallowEqual(constants, generated), "Generated constant table should be shallow equal to the original")
 end)

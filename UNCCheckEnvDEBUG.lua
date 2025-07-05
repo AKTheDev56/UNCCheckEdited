@@ -162,53 +162,50 @@ end)
 
 test("getcallingscript", {})
 
+function randomString()
+	local length = math.random(10, 20)
+	local array = {}
+	for i = 1, length do
+		array[i] = string.char(math.random(32, 126))
+	end
+	return table.concat(array)
+end
+
+local folder = Instance.new("Folder")
+folder.Name = randomString()
+if gethui then
+   folder.Parent = gethui()
+else
+   folder.Parent = game:GetService("CoreGui")
+end
+
+local testModule = Instance.new("ModuleScript")
+testModule.Name = "getscriptclosureTestModule"
+testModule.Source = [[
+	return {
+		testTable = "TestTableString";
+	}
+]]
+testModule.Parent = folder
+
 test("getscriptclosure", {"getscriptfunction"}, function()
-	local function randomString()
-		local length = math.random(10, 20)
-		local array = {}
-		for i = 1, length do
-			array[i] = string.char(math.random(32, 126))
-		end
-		return table.concat(array)
-	end
-
-	local folder = Instance.new("Folder")
-	folder.Name = randomString()
-	if gethui then
-		folder.Parent = gethui()
-	else
-		folder.Parent = game:GetService("CoreGui")
-	end
-
-	local testModule = Instance.new("ModuleScript")
-	testModule.Name = "getscriptclosureTestModule"
-	testModule.Source = [[
-		return {
-			testTable = "TestTableString";
-		}
-	]]
-	testModule.Parent = folder
-
-	local module = folder.getscriptclosureTestModule
+	local module = folder:FindFirstChild("getscriptclosureTestModule")
 	assert(module, "Module reference is nil")
 
-	local success, err = pcall(function()
-		local constants = getrenv().require(module)
-		assert(type(constants) == "table", "Original module did not return a table. Got: " .. typeof(constants))
+	local constants = getrenv().require(module)
+	assert(type(constants) == "table", "Original module did not return a table. Got: " .. typeof(constants))
 
-		local closureFunc = getscriptclosure(module)
-		assert(type(closureFunc) == "function", "getscriptclosure did not return a function")
+	local closureFunc = getscriptclosure(module)
+	assert(type(closureFunc) == "function", "getscriptclosure did not return a function")
 
-		local generated = closureFunc()
-		assert(type(generated) == "table", "Generated module did not return a table")
+	local generated = closureFunc()
+	assert(type(generated) == "table", "Generated module did not return a table")
 
-		assert(constants ~= generated, "Generated module should not be the same instance as the original")
-		assert(shallowEqual(constants, generated), "Generated constant table should be shallow equal to the original")
-	end)
+	assert(constants ~= generated, "Generated module should not be the same instance as the original")
+	assert(shallowEqual(constants, generated), "Generated constant table should be shallow equal to the original")
 
+	module:Destroy()
 	folder:Destroy()
-
-	assert(success, err)
 end)
 
 test("hookfunction", {"replaceclosure"}, function()

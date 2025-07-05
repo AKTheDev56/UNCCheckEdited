@@ -165,7 +165,7 @@ test("getcallingscript", {})
 test("getscriptclosure", {"getscriptfunction"}, function()
 	local module = game:GetService("CoreGui").RobloxGui.Modules.Common.AvatarChatConstants
 
-	local constants = getrenv().require(module)
+	local constants = require(module)
 	assert(type(constants) == "table", "Original module did not return a table")
 
 	local closureFunc = getscriptclosure(module)

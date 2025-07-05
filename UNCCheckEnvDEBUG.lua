@@ -1,3 +1,14 @@
+local module = game:GetService("CoreGui").RobloxGui.Modules.Common.AvatarChatConstants
+print("Module:", module)
+
+local worked, result = pcall(function()
+	return require(module)
+end)
+
+print("Worked:", worked)
+print("Result:", result)
+
+
 local passes, fails, undefined = 0, 0, 0
 local running = 0
 

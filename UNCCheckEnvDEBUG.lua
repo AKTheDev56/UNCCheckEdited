@@ -1,3 +1,10 @@
+local mod = Instance.new("ModuleScript")
+mod.Source = "return {Test = 123}"
+mod.Parent = game:GetService("ReplicatedStorage")
+
+print(pcall(require, mod))
+
+
 local passes, fails, undefined = 0, 0, 0
 local running = 0
 

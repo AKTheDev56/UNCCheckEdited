@@ -162,29 +162,11 @@ end)
 
 test("getcallingscript", {})
 
-function randomString()
-	local length = math.random(10, 20)
-	local array = {}
-	for i = 1, length do
-		array[i] = string.char(math.random(32, 126))
-	end
-	return table.concat(array)
-end
-
-local folder = Instance.new("Folder")
-folder.Name = randomString()
-folder.Parent = game:GetService("ReplicatedStorage")
-
-local testModule = Instance.new("ModuleScript")
-testModule.Name = "getscriptclosureTestModule"
-testModule.Source = "return { TestTable = 'TestTableString' }"
-testModule.Parent = folder
-
 test("getscriptclosure", {"getscriptfunction"}, function()
-	local module = folder:FindFirstChild("getscriptclosureTestModule")
+	local module = game.Players.LocalPlayer.PlayerScripts.PlayerModule
 	assert(module, "Module reference is nil")
 
-	local constants = require(module)
+	local constants = getrenv().require(module)
 	assert(type(constants) == "table", "Original module did not return a table. Got: " .. typeof(constants))
 
 	local closureFunc = getscriptclosure(module)
@@ -195,9 +177,6 @@ test("getscriptclosure", {"getscriptfunction"}, function()
 
 	assert(constants ~= generated, "Generated module should not match the original")
 	assert(shallowEqual(constants, generated), "Generated constant table should be shallow equal to the original")
-
-	module:Destroy()
-	folder:Destroy()
 end)
 
 test("hookfunction", {"replaceclosure"}, function()

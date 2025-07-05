@@ -164,9 +164,17 @@ test("getcallingscript", {})
 
 test("getscriptclosure", {"getscriptfunction"}, function()
 	local module = game:GetService("CoreGui").RobloxGui.Modules.Common.AvatarChatConstants
+
 	local constants = getrenv().require(module)
-	local generated = getscriptclosure(module)()
-	assert(constants ~= generated, "Generated module should not match the original")
+	assert(type(constants) == "table", "Original module did not return a table")
+
+	local closureFunc = getscriptclosure(module)
+	assert(type(closureFunc) == "function", "getscriptclosure did not return a function")
+
+	local generated = closureFunc()
+	assert(type(generated) == "table", "Generated module did not return a table")
+
+	assert(constants ~= generated, "Generated module should not be the same instance as the original")
 	assert(shallowEqual(constants, generated), "Generated constant table should be shallow equal to the original")
 end)
 

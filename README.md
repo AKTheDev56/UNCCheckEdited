@@ -27,4 +27,4 @@ loadstring(game:HttpGet('https://raw.githubusercontent.com/AKTheDev56/UNCCheckEd
 GrandUNCtest
 ------------
 
-loadstring(game:HttpGet('https://raw.githubusercontent.com/AKTheDev56/UNCCheckEdited/refs/heads/main/GrandUNCtest')()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/AKTheDev56/UNCCheckEdited/refs/heads/main/GrandUNCtest.txt')()

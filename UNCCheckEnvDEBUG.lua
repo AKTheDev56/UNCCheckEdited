@@ -173,7 +173,7 @@ end
 
 local folder = Instance.new("Folder")
 folder.Name = randomString()
-folder.Parent = gethui and gethui() or game:GetService("CoreGui")
+folder.Parent = game:GetService("ReplicatedStorage")
 
 local testModule = Instance.new("ModuleScript")
 testModule.Name = "getscriptclosureTestModule"

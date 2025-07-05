@@ -1,16 +1,3 @@
-local testModule = Instance.new("ModuleScript")
-testModule.Name = "moduletest"
-testModule.Source = "return { Hello = 'World' }"
-testModule.Parent = game:GetService("ReplicatedStorage")
-
-local success, result = pcall(function()
-	return getrenv().require(moduletest)
-end)
-
-print("✅ Success:", success)
-print("📦 Result:", result)
-
-
 local passes, fails, undefined = 0, 0, 0
 local running = 0
 
@@ -186,18 +173,22 @@ end
 
 local folder = Instance.new("Folder")
 folder.Name = randomString()
-folder.Parent = game:GetService("ReplicatedStorage")
+if gethui then
+  folder.Parent = gethui()
+else
+  folder.Parent = game:GetService("CoreGui")
+end
 
 local testModule = Instance.new("ModuleScript")
 testModule.Name = "getscriptclosureTestModule"
-testModule.Source = "return { ThrottleUpdateEventName = 'AvatarChatThrottleUpdateEvent' }"
+testModule.Source = "return { TestTable = 'TestTableString' }"
 testModule.Parent = folder
 
 test("getscriptclosure", {"getscriptfunction"}, function()
 	local module = folder:FindFirstChild("getscriptclosureTestModule")
 	assert(module, "Module reference is nil")
 
-	local constants = getrenv().require(module)
+	local constants = require(module)
 	assert(type(constants) == "table", "Original module did not return a table. Got: " .. typeof(constants))
 
 	local closureFunc = getscriptclosure(module)
@@ -206,7 +197,7 @@ test("getscriptclosure", {"getscriptfunction"}, function()
 	local generated = closureFunc()
 	assert(type(generated) == "table", "Generated module did not return a table")
 
-	assert(constants ~= generated, "Generated module should not be the same instance as the original")
+	assert(constants ~= generated, "Generated module should not match the original")
 	assert(shallowEqual(constants, generated), "Generated constant table should be shallow equal to the original")
 
 	module:Destroy()

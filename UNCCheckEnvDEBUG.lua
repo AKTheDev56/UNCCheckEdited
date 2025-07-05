@@ -1,3 +1,16 @@
+local testModule = Instance.new("ModuleScript")
+testModule.Name = "moduletest"
+testModule.Source = "return { Hello = 'World' }"
+testModule.Parent = game:GetService("ReplicatedStorage")
+
+local success, result = pcall(function()
+	return getrenv().require(moduletest)
+end)
+
+print("✅ Success:", success)
+print("📦 Result:", result)
+
+
 local passes, fails, undefined = 0, 0, 0
 local running = 0
 

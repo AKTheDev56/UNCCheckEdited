@@ -184,7 +184,7 @@ test("getscriptclosure", {"getscriptfunction"}, function()
 	testModule.Name = "getscriptclosureTestModule"
 	testModule.Source = [[
 		return {
-			ThrottleUpdateEventName = "AvatarChatThrottleUpdateEvent";
+			testTable = "TestTableString";
 		}
 	]]
 	testModule.Parent = folder

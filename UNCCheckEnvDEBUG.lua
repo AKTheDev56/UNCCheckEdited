@@ -173,15 +173,11 @@ end
 
 local folder = Instance.new("Folder")
 folder.Name = randomString()
-if gethui then
-   folder.Parent = gethui()
-else
-   folder.Parent = game:GetService("CoreGui")
-end
+folder.Parent = gethui and gethui() or game:GetService("CoreGui")
 
 local testModule = Instance.new("ModuleScript")
 testModule.Name = "getscriptclosureTestModule"
-testModule.Source = "return { TestTable = 'TestTableString' }"
+testModule.Source = "return { ThrottleUpdateEventName = 'AvatarChatThrottleUpdateEvent' }"
 testModule.Parent = folder
 
 test("getscriptclosure", {"getscriptfunction"}, function()

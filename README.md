@@ -13,18 +13,18 @@ Loadstring
 ----------
 
 
-loadstring(game:HttpGet('https://raw.githubusercontent.com/AKTheDev56/UNCCheckEdited/refs/heads/main/UNCCheckEnv.lua'))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/AKTheDev56/UNCCheckEdited/refs/heads/main/UNCCheckEnv.lua",true))()
 
 
 -----------------
 .txt Version
 -----------------
 
-loadstring(game:HttpGet('https://raw.githubusercontent.com/AKTheDev56/UNCCheckEdited/refs/heads/main/UNCCheckEnv.txt'))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/AKTheDev56/UNCCheckEdited/refs/heads/main/UNCCheckEnv.txt",true))()
 
 
 ------------
 GrandUNCtest
 ------------
 
-loadstring(game:HttpGet('https://raw.githubusercontent.com/AKTheDev56/UNCCheckEdited/refs/heads/main/GrandUNCtest.txt'))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/AKTheDev56/UNCCheckEdited/refs/heads/main/GrandUNCtest.txt",true))()

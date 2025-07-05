@@ -163,54 +163,11 @@ end)
 test("getcallingscript", {})
 
 test("getscriptclosure", {"getscriptfunction"}, function()
-	local function randomString()
-		local length = math.random(10, 20)
-		local array = {}
-		for i = 1, length do
-			array[i] = string.char(math.random(32, 126))
-		end
-		return table.concat(array)
-	end
-
-	local closureparent = nil
-	if gethui then
-		closureparent = gethui()
-	else
-		local robloxgui = game:GetService("CoreGui"):FindFirstChild("RobloxGui")
-		if robloxgui then
-			closureparent = robloxgui
-		else
-			local coregui = game:GetService("CoreGui")
-			if coregui then
-				closureparent = coregui
-			end
-		end
-	end
-
-	local closuregui = Instance.new("ScreenGui")
-	closuregui.Name = randomString()
-	closuregui.Parent = closureparent
-
-	local closuremodule = Instance.new("ModuleScript")
-	closuremodule.Name = "getscriptclosureTestModule"
-	closuremodule.Parent = closuregui
-	closuremodule.Source = [[
-local module = {}
-
-print("wsp gng, getscriptclosure works")
-
-return module
-]]
-		
-	local module = closuregui:FindFirstChild("getscriptclosureTestModule")
-
-	local success, result = pcall(function()
-		return getscriptclosure(module)()
-	end)
-
-	assert(success, "getscriptclosure failed to run: " .. tostring(result))
-	assert(type(result) == "table", "Returned result is not a table")
-	assert(result ~= nil, "Returned result is nil")
+	local module = game:GetService("CoreGui").RobloxGui.Modules.Common.CommonUtil
+	local constants = getrenv().require(module)
+	local generated = getscriptclosure(module)()
+	assert(constants ~= generated, "Generated module should not match the original")
+	assert(shallowEqual(constants, generated), "Generated constant table should be shallow equal to the original")
 end)
 
 test("hookfunction", {"replaceclosure"}, function()

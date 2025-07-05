@@ -181,11 +181,7 @@ end
 
 local testModule = Instance.new("ModuleScript")
 testModule.Name = "getscriptclosureTestModule"
-testModule.Source = [[
-	return {
-		testTable = "TestTableString";
-	}
-]]
+testModule.Source = "return { TestTable = 'TestTableString' }"
 testModule.Parent = folder
 
 test("getscriptclosure", {"getscriptfunction"}, function()

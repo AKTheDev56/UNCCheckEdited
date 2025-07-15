@@ -6,7 +6,7 @@ Edited version of https://github.com/unified-naming-convention/NamingStandard
 
 Changes: Instead of a hidden .test folder on some devices, there is now a non-hidden, UNCChecktest folder.
 
-getscriptclosure Fixed!  (note: some executors still may not work, i am currently working on it)
+getscriptclosure Fixed!  (note: some executors still may not work, i am working on it)
 
 ----------
 Loadstring

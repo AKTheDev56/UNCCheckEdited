@@ -173,7 +173,7 @@ test("getscriptclosure", {"getscriptfunction"}, function()
 	end)
 
 	if not success and string.find(err, "Cannot require a non-RobloxScript module from a RobloxScript") then
-		local fallbackModule = game.CoreGui.RobloxGui.Modules.Common.AvatarChatConstants
+		local fallbackModule = game.CoreGui.RobloxGui.Modules.Common.CommonUtil
 
 		assert(fallbackModule, "Fallback module reference is nil")
 

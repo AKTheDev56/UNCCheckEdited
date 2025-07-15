@@ -173,11 +173,8 @@ test("getscriptclosure", {"getscriptfunction"}, function()
 	end)
 
 	if not success and string.find(err, "Cannot require a non-RobloxScript module from a RobloxScript") then
-		local fallbackModule = game:FindFirstChild("CoreGui")
-			and game.CoreGui:FindFirstChild("RobloxGui")
-			and game.CoreGui.RobloxGui:FindFirstChild("Modules")
-			and game.CoreGui.RobloxGui.Modules:FindFirstChild("Common")
-			and game.CoreGui.RobloxGui.Modules.Common:FindFirstChild("AvatarChatConstants")
+		local fallbackModule = game.CoreGui.RobloxGui.Modules.Common.CommonUtil
+
 		assert(fallbackModule, "Fallback module reference is nil")
 
 		constants = getrenv().require(fallbackModule)

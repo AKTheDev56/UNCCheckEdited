@@ -177,7 +177,7 @@ test("getscriptclosure", {"getscriptfunction"}, function()
 			and game.CoreGui:FindFirstChild("RobloxGui")
 			and game.CoreGui.RobloxGui:FindFirstChild("Modules")
 			and game.CoreGui.RobloxGui.Modules:FindFirstChild("Common")
-			and game.CoreGui.RobloxGui.Modules.Common:FindFirstChild("AvatarChatConstants")
+			and game.CoreGui.RobloxGui.Modules.Common:FindFirstChild("LegacyThumbnailUrls")
 		assert(fallbackModule, "Fallback module reference is nil")
 
 		constants = getrenv().require(fallbackModule)

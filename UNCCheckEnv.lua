@@ -163,11 +163,27 @@ end)
 test("getcallingscript", {})
 
 test("getscriptclosure", {"getscriptfunction"}, function()
-	local module = game.Players.LocalPlayer.PlayerScripts.PlayerModule
+	local module = game.Players.LocalPlayer:FindFirstChild("PlayerScripts")
+		and game.Players.LocalPlayer.PlayerScripts:FindFirstChild("PlayerModule")
 	assert(module, "Module reference is nil")
 
-	local constants = getrenv().require(module)
-	assert(type(constants) == "table", "Original module did not return a table. Got: " .. typeof(constants))
+	local constants
+	local success, err = pcall(function()
+		constants = getrenv().require(module)
+	end)
+
+	if not success and string.find(err, "Cannot require a non-RobloxScript module from a RobloxScript") then
+		local fallbackModule = game:FindFirstChild("CoreGui")
+			and game.CoreGui:FindFirstChild("RobloxGui")
+			and game.CoreGui.RobloxGui:FindFirstChild("Modules")
+			and game.CoreGui.RobloxGui.Modules:FindFirstChild("Common")
+			and game.CoreGui.RobloxGui.Modules.Common:FindFirstChild("AvatarChatConstants")
+		assert(fallbackModule, "Fallback module reference is nil")
+
+		constants = getrenv().require(fallbackModule)
+	end
+
+	assert(type(constants) == "table", "Module did not return a table. Got: " .. typeof(constants))
 
 	local closureFunc = getscriptclosure(module)
 	assert(type(closureFunc) == "function", "getscriptclosure did not return a function")
